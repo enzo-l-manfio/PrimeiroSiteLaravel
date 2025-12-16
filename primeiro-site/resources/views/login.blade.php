@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Escrever Recado</title>
+    <title>Lista de Produtos</title>
     <style>
         body { font-family: sans-serif; }
         table { width: 50%; border-collapse: collapse; }
@@ -11,13 +11,17 @@
     </style>
 </head>
 <body>
-    <h3>Escrever Recado:</h3>
-
-    <form action="{{route('postar.recado')}}" method="Post">
+    <header>
+    <h1>Mural de Recados</h1>
+    </header>
+    
+    <form method = "POST"action={{url("/login")}}>
         @csrf
-        <input type="date" name="data" placeholder="Data"> <br><br>
-        <textarea name="mensagem" placeholder="Recado"></textarea> <br><br>
-        <input type="submit" value="Postar Recado">
+        <input type="email" name="email" placeholder="Email"><br><br>
+        <input type="password" name="password" placeholder="Senha"><br><br>
+        <button type="submit">Login</button>
     </form>
+    
+    
 </body>
 </html>

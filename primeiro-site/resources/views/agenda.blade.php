@@ -1,14 +1,9 @@
-<?php
 
-
-$recados = DB::select("SELECT * FROM recados_view");
-
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Produtos</title>
+    <title>AgendaVirtual</title>
     <style>
         body { font-family: sans-serif; }
         table { width: 50%; border-collapse: collapse; }
@@ -18,31 +13,31 @@ $recados = DB::select("SELECT * FROM recados_view");
 </head>
 <body>
     <header>
-    <h1>Mural de Recados</h1>
+    <h1>Agenda Virtual</h1>
     </header>
     <main>
     <h2>Recados</h2>
     <table>
         <tr>
-            <th>ID</th>
-            <th>Autor</th>
             <th>Recado</th>
-            <th>Data de Publicação</th>
+            <th>Data</th>
         </tr>
         <?php
         // 4. Processar e exibir os resultados
             foreach ($recados as $recado) {
                 echo "<tr>";
-                echo "<td>" . $recado -> id . "</td>";
-                echo "<td>" . $recado -> autor . "</td>";
                 echo "<td>" . $recado -> mensagem . "</td>";
-                echo "<td>" . $recado -> data_publicacao . "</td>";
+                echo "<td>" . $recado -> data . "</td>";
                 echo "</tr>";
             }
         ?>
     </table>
-    <form action={{url('escreverRecado')}}>
+    <form action={{route('escrever.recado')}} >
         <button type="submit">Adicionar Recado</button>
+    </form>
+    <form action={{route('logout')}} method="POST">
+        @csrf
+        <button type="submit">Sair</button>
     </form>
     
 </body>

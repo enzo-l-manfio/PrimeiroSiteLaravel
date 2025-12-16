@@ -1,10 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RecadosController;
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\LoginController;
 
-Route::get("/", [RecadosController::class, 'MostrarMural']);
+Route::get("/", [LoginController:: class, 'PaginaInicial']);
 
-Route::get("/escreverRecado", [RecadosController::class, 'EscreverRecado']);
+Route::post("/login", [LoginController::class, "authenticate"]);
 
-Route::post('postarRecado', [RecadosController::class, 'PostarRecado']);
+Route::middleware(['auth'])->group(function () {
+
+    Route::get("/Agenda", [AgendaController::class, 'MostrarAgenda']);
+
+    Route::post("/Agenda/logout", [LoginController::class, "Logout"])->name('logout');;
+
+    Route::get("/Agenda/escreverRecado", [AgendaController::class, 'EscreverRecado'])->name('escrever.recado');;
+
+    Route::post('/Agenda/escreverRecado/postarRecado', [AgendaController::class, 'PostarRecado'])->name('postar.recado');;
+});

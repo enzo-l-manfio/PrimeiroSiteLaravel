@@ -14,8 +14,7 @@ return new class extends Migration
         DB::statement("
             CREATE VIEW recados_view AS
             SELECT *
-            FROM recados
-            ORDER BY data_publicacao DESC");
+            FROM recados");
     }
 
     /**
