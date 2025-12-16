@@ -15,6 +15,17 @@
     <h1>Agenda Virtual</h1>
     </header>
     
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <h3>Erro ao autenticar:</h3>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li><h3>{{ $error }}</h3></li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    
     <form method = "POST" action={{route("autenticar")}}>
         @csrf
         <input type="email" name="email" placeholder="Email"><br><br>
