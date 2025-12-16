@@ -5,8 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
+use App\Models\User;
 
-class LoginController extends Controller
+class UsuarioController extends Controller
 {
     public function PaginaInicial(){
         return view("login");
@@ -30,7 +31,7 @@ class LoginController extends Controller
 
  
 
-            return redirect("/Agenda");
+            return redirect()->route('agenda');
 
         }
 
@@ -42,6 +43,34 @@ class LoginController extends Controller
         ])->onlyInput('email');
 
     }
+
+    public function EscreverRegistro()
+    {
+        return view('registro');
+    }
+
+    public function SalvarRegistro(Request $request){
+
+        $dadosUsuario = $request->validate([
+
+            'name' => ['required'],
+
+            'email' => ['required', 'email'],
+
+            'password' => ['required'],
+
+        ]);
+
+        $dadosUsuario['password'] = bcrypt($dadosUsuario['password']);
+
+        $usuario = User::create($dadosUsuario);
+
+        Auth::login($usuario);
+
+        return redirect()->route('agenda');
+
+    }
+
     public function Logout() {
         Auth::guard('web') -> Logout();
         Session::invalidate();

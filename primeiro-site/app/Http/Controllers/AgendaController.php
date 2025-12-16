@@ -35,6 +35,6 @@ class AgendaController extends Controller
         $recado -> data = $request -> data;
         
         $recado -> save();
-        return redirect('/Agenda');
+        return redirect()->route('agenda');
     }
 }

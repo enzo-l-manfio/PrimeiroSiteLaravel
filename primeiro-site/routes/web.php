@@ -2,19 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgendaController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UsuarioController;
 
-Route::get("/", [LoginController:: class, 'PaginaInicial']);
+Route::get("/", [UsuarioController:: class, 'PaginaInicial']);
 
-Route::post("/login", [LoginController::class, "authenticate"]);
+Route::post("/autenticar", [UsuarioController::class, "authenticate"]) -> name('autenticar');
+
+Route::get("/registrar", [UsuarioController::class, "EscreverRegistro"]) -> name('escrever.registro');
+
+Route::post("/registrar/adicionar_usuario", [UsuarioController::class, "SalvarRegistro"]) -> name('salvar.registro');
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get("/Agenda", [AgendaController::class, 'MostrarAgenda']);
+    Route::get("/agenda", [AgendaController::class, 'MostrarAgenda']) -> name('agenda');
 
-    Route::post("/Agenda/logout", [LoginController::class, "Logout"])->name('logout');;
+    Route::post("/agenda/logout", [UsuarioController::class, "Logout"])->name('logout');;
 
-    Route::get("/Agenda/escreverRecado", [AgendaController::class, 'EscreverRecado'])->name('escrever.recado');;
+    Route::get("/agenda/escrever_recado", [AgendaController::class, 'EscreverRecado'])->name('escrever.recado');;
 
-    Route::post('/Agenda/escreverRecado/postarRecado', [AgendaController::class, 'PostarRecado'])->name('postar.recado');;
+    Route::post('/Agenda/escrever_recado/postar_recado', [AgendaController::class, 'PostarRecado'])->name('postar.recado');;
 });

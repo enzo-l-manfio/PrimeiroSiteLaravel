@@ -15,15 +15,14 @@
     <h1>Agenda Virtual</h1>
     </header>
     
-    <form method = "POST" action={{route("autenticar")}}>
+    <form method = "POST"action={{route('salvar.registro')}}>
         @csrf
+        <input type="text" name="name" placeholder="Nome"><br><br>
         <input type="email" name="email" placeholder="Email"><br><br>
         <input type="password" name="password" placeholder="Senha"><br><br>
-        <button type="submit">Login</button>
+        <button type="submit">Registrar</button>
     </form>
-    <form method="GET" action={{route("escrever.registro")}}>
-        <button type="submit">Registrar-se</button>
-    </form>
+    
     
 </body>
 </html>
